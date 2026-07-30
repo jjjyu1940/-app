@@ -40,7 +40,8 @@ https://wwanh.lanzouw.com/ikKtz3zjk2te
 
 
 支持 Android 9 以上
-
+网盘下载并不是最新版本。
+需要最新版本，请在gitcode或github下载发行版。
 gitcode地址:
 https://github.com/jjjyu1940/-app
 
