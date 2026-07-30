@@ -31,7 +31,7 @@
 
 本项目使用了人工智能辅助制作
 
-下载
+## ↓下载
 
 https://wwanh.lanzouw.com/ikKtz3zjk2te
 也可以直接下载
@@ -42,7 +42,10 @@ https://wwanh.lanzouw.com/ikKtz3zjk2te
 支持 Android 9 以上
 网盘下载并不是最新版本。
 需要最新版本，请在gitcode或github下载发行版。
-gitcode地址:
+## 😯需要在电脑上使用？
+下载index.html即可在任何设备上使用。
+
+## gitcode地址:
 https://github.com/jjjyu1940/-app
 
 
