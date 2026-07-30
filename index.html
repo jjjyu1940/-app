@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>临时邮箱 · Temp Mail</title>
+    <style>
+        /* ---------- CSS 变量 / 主题 ---------- */
+        :root {
+            --bg-body: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-card: #ffffff;
+            --text-primary: #1a2a3a;
+            --text-secondary: #2a3a4a;
+            --text-muted: #7a8a9a;
+            --border-light: #dce4ec;
+            --bg-input: #fafbfc;
+            --bg-inbox: #fcfdff;
+            --bg-hover: #f0f4ff;
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.18);
+            --gradient-icon: linear-gradient(135deg, #667eea, #764ba2);
+            --gradient-header: linear-gradient(135deg, #667eea, #764ba2);
+            --addr-bg: linear-gradient(135deg, #f0f4ff, #f8f0ff);
+            --addr-border: #b8c4dd;
+            --btn-outline-bg: #fff;
+            --btn-outline-border: #dce4ec;
+            --btn-outline-text: #2a3a4a;
+            --btn-danger-bg: #fff;
+            --btn-danger-border: #f5c6cb;
+            --modal-bg: #fff;
+            --modal-body-bg: #f8fafc;
+            --modal-body-border: #eef2f6;
+            --msg-info-bg: #eef4fa;
+            --msg-info-text: #1a4a7a;
+            --msg-info-border: #ccddee;
+            --msg-success-bg: #ebf8ed;
+            --msg-success-text: #1a7a2a;
+            --msg-error-bg: #fff0ee;
+            --msg-error-text: #b02020;
+            --scrollbar-thumb: #d0d8e0;
+        }
+
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #cccccc;
+            --text-muted: #aaaaaa;
+            --border-light: #333;
+            --bg-input: #2a2a2a;
+            --bg-inbox: #252525;
+            --bg-hover: #2a2a2a;
+            --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.6);
+            --gradient-icon: linear-gradient(135deg, #444, #666);
+            --gradient-header: linear-gradient(135deg, #444, #666);
+            --addr-bg: linear-gradient(135deg, #2a2a2a, #333);
+            --addr-border: #555;
+            --btn-outline-bg: #2a2a2a;
+            --btn-outline-border: #444;
+            --btn-outline-text: #ccc;
+            --btn-danger-bg: #2a2a2a;
+            --btn-danger-border: #833;
+            --modal-bg: #1e1e1e;
+            --modal-body-bg: #2a2a2a;
+            --modal-body-border: #333;
+            --msg-info-bg: #1a2a3a;
+            --msg-info-text: #8ab4f8;
+            --msg-info-border: #2a4a6a;
+            --msg-success-bg: #1a3a2a;
+            --msg-success-text: #6fcf97;
+            --msg-error-bg: #3a1a1a;
+            --msg-error-text: #f28b82;
+            --scrollbar-thumb: #555;
+        }
+
+        /* ---------- 全局 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background 0.4s ease;
+        }
+
+        .card {
+            width: 580px;
+            max-width: 100%;
+            background: var(--bg-card);
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            padding: 32px 26px 28px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .header .icon-mail {
+            width: 54px;
+            height: 54px;
+            background: var(--gradient-icon);
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #fff;
+            margin-bottom: 10px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+            transition: background 0.3s ease;
+        }
+        .header h1 {
+            font-size: 21px;
+            font-weight: 620;
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+        }
+        .header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            transition: color 0.3s ease;
+        }
+
+        /* 设置齿轮 */
+        .settings-gear {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 10px;
+            transition: background 0.2s, transform 0.2s;
+            color: var(--text-muted);
+            line-height: 1;
+        }
+        .settings-gear:hover {
+            background: rgba(128, 128, 128, 0.15);
+            transform: rotate(30deg);
+        }
+        .settings-gear:active {
+            transform: rotate(60deg);
+        }
+
+        /* ===== 设置面板 ===== */
+        .settings-panel {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 18px 20px 20px;
+            margin-bottom: 18px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .settings-panel.open {
+            display: block;
+        }
+        .settings-panel h3 {
+            font-size: 15px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 550;
+        }
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .setting-row label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 470;
+        }
+        .setting-row input[type="color"] {
+            width: 44px;
+            height: 38px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 2px;
+            background: var(--bg-input);
+            cursor: pointer;
+        }
+        .setting-row input[type="text"] {
+            flex: 1;
+            min-width: 140px;
+            padding: 8px 12px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 13px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .setting-row input[type="text"]:focus {
+            border-color: #667eea;
+        }
+        .setting-row .toggle-switch {
+            position: relative;
+            width: 46px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+            flex-shrink: 0;
+        }
+        .setting-row .toggle-switch.active {
+            background: #667eea;
+        }
+        .setting-row .toggle-switch::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+        .setting-row .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+        .settings-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+            justify-content: flex-end;
+        }
+        .settings-actions .btn-sm {
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 490;
+            transition: 0.2s;
+        }
+        .settings-actions .btn-sm.primary {
+            background: #667eea;
+            color: #fff;
+        }
+        .settings-actions .btn-sm.primary:hover {
+            background: #5568d0;
+        }
+        .settings-actions .btn-sm.outline {
+            background: transparent;
+            border: 1.5px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+        .settings-actions .btn-sm.outline:hover {
+            background: var(--bg-hover);
+        }
+
+        /* ===== 域名选择 ===== */
+        .domain-pick {
+            margin-bottom: 14px;
+        }
+        .domain-pick label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+        .domain-pick select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--text-primary);
+            background: var(--bg-input);
+            outline: none;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .domain-pick select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        /* ===== 邮箱地址卡片 ===== */
+        .addr-card {
+            background: var(--addr-bg);
+            border: 1.5px dashed var(--addr-border);
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            margin-bottom: 18px;
+            word-break: break-all;
+            position: relative;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .addr-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+        .addr-card .value {
+            font-size: 19px;
+            font-weight: 610;
+            color: var(--text-primary);
+            letter-spacing: 0.2px;
+            transition: color 0.3s ease;
+        }
+        .addr-card .copy-btn {
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #667eea;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 520;
+        }
+        .addr-card .copy-btn:hover {
+            color: #4a5ec0;
+        }
+
+        /* ===== 状态指示 ===== */
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: 0.3s;
+        }
+        .dot.live {
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== 收件箱 ===== */
+        .inbox {
+            max-height: 290px;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            background: var(--bg-inbox);
+            margin-bottom: 16px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .inbox::-webkit-scrollbar {
+            width: 6px;
+        }
+        .inbox::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 3px;
+        }
+
+        .mail-item {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .mail-item:last-child {
+            border-bottom: none;
+        }
+        .mail-item:hover {
+            background: var(--bg-hover);
+        }
+        .mail-item.unread {
+            background: var(--bg-hover);
+            border-left: 3px solid #667eea;
+            padding-left: 13px;
+        }
+        .mail-item .from {
+            font-weight: 540;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .mail-item .subject {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease;
+        }
+        .mail-item .time {
+            font-size: 11px;
+            color: var(--text-muted);
+            float: right;
+            margin-top: 2px;
+            transition: color 0.3s ease;
+        }
+        .mail-item .preview {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease;
+        }
+
+        .no-mails {
+            padding: 48px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .no-mails .big-emoji {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== 按钮 ===== */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 22px;
+            border-radius: 60px;
+            font-size: 14px;
+            font-weight: 510;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        .btn-primary:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-outline {
+            background: var(--btn-outline-bg);
+            border: 1.5px solid var(--btn-outline-border);
+            color: var(--btn-outline-text);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: var(--bg-hover);
+            border-color: var(--addr-border);
+        }
+        .btn-outline:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+            background: var(--btn-danger-bg);
+            border: 1.5px solid var(--btn-danger-border);
+            color: #c82020;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-danger:hover {
+            background: #fff5f5;
+        }
+        .btn-danger:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ===== 提示消息 ===== */
+        .msg {
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            display: none;
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .msg.show {
+            display: block;
+        }
+        .msg.error {
+            background: var(--msg-error-bg);
+            color: var(--msg-error-text);
+            border: 1px solid #fcdad6;
+        }
+        .msg.success {
+            background: var(--msg-success-bg);
+            color: var(--msg-success-text);
+            border: 1px solid #c6eacb;
+        }
+        .msg.info {
+            background: var(--msg-info-bg);
+            color: var(--msg-info-text);
+            border: 1px solid var(--msg-info-border);
+        }
+
+        /* ===== 邮件详情弹窗 ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .overlay.show {
+            display: flex;
+        }
+        .modal {
+            background: var(--modal-bg);
+            border-radius: 20px;
+            padding: 26px 28px 22px;
+            max-width: 500px;
+            width: 92%;
+            max-height: 78vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            transition: background 0.3s ease;
+        }
+        .modal h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+            word-break: break-word;
+            transition: color 0.3s ease;
+        }
+        .modal .meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+        .modal .body {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            background: var(--modal-body-bg);
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--modal-body-border);
+            white-space: pre-wrap;
+            word-break: break-word;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .modal .close-btn {
+            margin-top: 14px;
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-hover);
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .modal .close-btn:hover {
+            background: var(--border-light);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 11px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 22px 16px;
+                border-radius: 18px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .addr-card .value {
+                font-size: 16px;
+            }
+            .settings-panel {
+                padding: 14px 14px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="icon-mail">📬</div>
+            <h1>临时邮箱</h1>
+            <p>免费 · 匿名 · 即用即弃</p>
+            <button class="settings-gear" id="settingsGear" title="设置">⚙️</button>
+        </div>
+
+        <!-- 设置面板 -->
+        <div class="settings-panel" id="settingsPanel">
+            <h3>⚙️ 设置</h3>
+            <div class="setting-row">
+                <label>🌙 深色模式</label>
+                <div class="toggle-switch" id="darkModeToggle"></div>
+            </div>
+            <div class="setting-row">
+                <label>🎨 自定义背景</label>
+                <input type="text" id="customBgInput" placeholder="颜色 (#fff) 或图片URL" />
+                <input type="color" id="customBgColor" value="#667eea" />
+            </div>
+            <div class="settings-actions">
+                <button class="btn-sm outline" id="resetBgBtn">重置默认</button>
+                <button class="btn-sm primary" id="applyBgBtn">应用</button>
+            </div>
+        </div>
+
+        <!-- 域名选择 -->
+        <div class="domain-pick">
+            <label for="domainSelect">📌 选择域名</label>
+            <select id="domainSelect">
+                <option value="">— 点击"生成邮箱"自动获取可用域名 —</option>
+            </select>
+        </div>
+
+        <!-- 邮箱地址 -->
+        <div class="addr-card" id="addrCard">
+            <div class="label">你的临时邮箱地址</div>
+            <div class="value" id="emailAddr">—</div>
+            <button class="copy-btn" id="copyBtn" style="display:none;">📋 复制地址</button>
+        </div>
+
+        <!-- 状态 -->
+        <div class="status-row">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">尚未生成邮箱</span>
+        </div>
+
+        <!-- 收件箱 -->
+        <div class="inbox" id="inbox">
+            <div class="no-mails" id="noMailMsg">
+                <div class="big-emoji">📭</div>
+                <div>点击下方按钮生成邮箱<br />等待邮件自动送达…</div>
+            </div>
+            <div id="mailList" style="display:none;"></div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-primary" id="genBtn">✨ 生成邮箱</button>
+            <button class="btn btn-outline" id="refreshBtn" disabled>🔄 刷新</button>
+            <button class="btn btn-danger" id="deleteBtn" disabled>🗑️ 销毁</button>
+        </div>
+
+        <!-- 提示 -->
+        <div class="msg" id="msgBox"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Powered by <a href="https://mail.tm" target="_blank" rel="noopener">Mail.tm</a> · 仅供合法用途
+        </div>
+    </div>
+
+    <!-- 邮件详情弹窗 -->
+    <div class="overlay" id="mailModal">
+        <div class="modal">
+            <h3 id="modalSubject">主题</h3>
+            <div class="meta" id="modalMeta"></div>
+            <div class="body" id="modalBody">内容</div>
+            <button class="close-btn" id="closeModalBtn">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const API = 'https://api.mail.tm';
+            const $ = (id) => document.getElementById(id);
+
+            // 状态
+            let emailAddress = '';
+            let token = '';
+            let accountId = '';
+            let pollTimer = null;
+            let knownIds = new Set();
+
+            // DOM 引用
+            const settingsPanel = $('settingsPanel');
+            const settingsGear = $('settingsGear');
+            const darkModeToggle = $('darkModeToggle');
+            const customBgInput = $('customBgInput');
+            const customBgColor = $('customBgColor');
+            const applyBgBtn = $('applyBgBtn');
+            const resetBgBtn = $('resetBgBtn');
+
+            // ===== 工具函数 =====
+            function showMsg(text, type = 'info') {
+                const m = $('msgBox');
+                m.className = 'msg show ' + type;
+                m.textContent = text;
+                setTimeout(() => { m.className = 'msg';
+                    m.textContent = ''; }, 4000);
+            }
+
+            function randomStr(len = 10) {
+                const c = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let s = '';
+                for (let i = 0; i < len; i++) s += c.charAt(Math.floor(Math.random() * c.length));
+                return s;
+            }
+
+            function escapeHtml(str) {
+                const d = document.createElement('div');
+                d.textContent = str || '';
+                return d.innerHTML;
+            }
+
+            function stripHtml(html) {
+                const t = document.createElement('div');
+                t.innerHTML = html;
+                return t.textContent || t.innerText || '';
+            }
+
+            function timeAgo(iso) {
+                const diff = Date.now() - new Date(iso).getTime();
+                const min = Math.floor(diff / 60000);
+                if (min < 1) return '刚刚';
+                if (min < 60) return min + '分钟前';
+                const h = Math.floor(min / 60);
+                if (h < 24) return h + '小时前';
+                return new Date(iso).toLocaleString();
+            }
+
+            // ===== 状态指示 =====
+            function setStatus(text, live = false) {
+                $('statusText').textContent = text;
+                $('statusDot').className = 'dot' + (live ? ' live' : '');
+            }
+
+            // ===== 设置管理 =====
+            function loadSettings() {
+                try {
+                    const dark = localStorage.getItem('tempMail_darkMode');
+                    if (dark === 'true') {
+                        document.body.classList.add('dark-mode');
+                        darkModeToggle.classList.add('active');
+                    }
+
+                    const bg = localStorage.getItem('tempMail_customBg');
+                    if (bg) {
+                        document.body.style.background = bg;
+                        customBgInput.value = bg;
+                    } else {
+                        // 恢复默认渐变
+                        document.body.style.background = '';
+                        customBgInput.value = '';
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            function saveDarkMode(enabled) {
+                try {
+                    localStorage.setItem('tempMail_darkMode', enabled ? 'true' : 'false');
+                } catch (e) { /* ignore */ }
+            }
+
+            function saveCustomBg(value) {
+                try {
+                    if (value) {
+                        localStorage.setItem('tempMail_customBg', value);
+                    } else {
+                        localStorage.removeItem('tempMail_customBg');
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            function toggleDarkMode() {
+                const isDark = document.body.classList.toggle('dark-mode');
+                darkModeToggle.classList.toggle('active', isDark);
+                saveDarkMode(isDark);
+            }
+
+            function applyBackground(value) {
+                if (!value || value.trim() === '') {
+                    // 恢复默认
+                    document.body.style.background = '';
+                    saveCustomBg('');
+                    customBgInput.value = '';
+                    return;
+                }
+                const v = value.trim();
+                // 如果是颜色值（#rgb, #rrggbb, rgb(), 等）或者url()
+                document.body.style.background = v;
+                saveCustomBg(v);
+                customBgInput.value = v;
+            }
+
+            // ===== 设置面板显示/隐藏 =====
+            settingsGear.addEventListener('click', function(e) {
+                e.stopPropagation();
+                settingsPanel.classList.toggle('open');
+            });
+
+            // 点击其他地方关闭设置面板
+            document.addEventListener('click', function(e) {
+                if (!settingsPanel.contains(e.target) && e.target !== settingsGear) {
+                    settingsPanel.classList.remove('open');
+                }
+            });
+
+            // 深色模式切换
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+
+            // 应用背景
+            applyBgBtn.addEventListener('click', function() {
+                const val = customBgInput.value.trim() || customBgColor.value;
+                if (val) {
+                    applyBackground(val);
+                    showMsg('背景已更新', 'success');
+                } else {
+                    applyBackground('');
+                    showMsg('已恢复默认背景', 'info');
+                }
+            });
+
+            // 重置背景
+            resetBgBtn.addEventListener('click', function() {
+                document.body.style.background = '';
+                saveCustomBg('');
+                customBgInput.value = '';
+                showMsg('已恢复默认渐变背景', 'info');
+            });
+
+            // 颜色选择器同步到文本框
+            customBgColor.addEventListener('input', function() {
+                customBgInput.value = this.value;
+            });
+
+            // ===== 拉取可用域名 =====
+            async function fetchDomains() {
+                const r = await fetch(API + '/domains');
+                if (!r.ok) throw new Error('获取域名列表失败 (HTTP ' + r.status + ')');
+                const d = await r.json();
+                const members = d['hydra:member'] || [];
+                if (!members.length) throw new Error('当前无可用域名');
+                const sel = $('domainSelect');
+                sel.innerHTML = '';
+                members.forEach(dom => {
+                    const o = document.createElement('option');
+                    o.value = dom.domain;
+                    o.textContent = dom.domain + (dom.isPrivate ? '（私有）' : '');
+                    sel.appendChild(o);
+                });
+                return members.map(m => m.domain);
+            }
+
+            // ===== 创建临时邮箱 =====
+            async function createTempMail() {
+                try {
+                    showMsg('正在获取可用域名…', 'info');
+                    const domains = await fetchDomains();
+
+                    let chosen = $('domainSelect').value;
+                    if (!chosen) {
+                        chosen = domains[Math.floor(Math.random() * domains.length)];
+                        $('domainSelect').value = chosen;
+                    }
+
+                    const address = randomStr(10) + '@' + chosen;
+                    const password = 'pwd_' + randomStr(8);
+
+                    showMsg('正在创建账户 ' + address + ' …', 'info');
+
+                    const res = await fetch(API + '/accounts', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ address, password })
+                    });
+
+                    if (!res.ok) {
+                        const err = await res.json().catch(() => ({}));
+                        throw new Error(err['hydra:description'] || ('创建失败 (HTTP ' + res.status + ')'));
+                    }
+
+                    const acc = await res.json();
+                    accountId = acc.id;
+                    emailAddress = acc.address;
+
+                    const tk = await fetch(API + '/token', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ address, password })
+                    });
+                    if (!tk.ok) throw new Error('获取令牌失败');
+                    token = (await tk.json()).token;
+
+                    // 更新 UI
+                    $('emailAddr').textContent = emailAddress;
+                    $('copyBtn').style.display = 'inline-flex';
+                    $('genBtn').textContent = '🔄 重新生成';
+                    $('refreshBtn').disabled = false;
+                    $('deleteBtn').disabled = false;
+                    setStatus('监听中 — 每 8 秒自动检查', true);
+                    showMsg('✅ 邮箱已创建：' + emailAddress, 'success');
+
+                    knownIds.clear();
+                    await fetchInbox();
+                    startPolling();
+                } catch (err) {
+                    console.error(err);
+                    showMsg('⚠️ ' + err.message, 'error');
+                    setStatus('创建失败，请重试');
+                }
+            }
+
+            // ===== 拉取收件箱 =====
+            async function fetchInbox() {
+                if (!token) return;
+                try {
+                    const res = await fetch(API + '/messages', {
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    });
+                    if (!res.ok) {
+                        if (res.status === 401) {
+                            showMsg('会话已过期，请重新生成邮箱', 'error');
+                            destroyAll();
+                            return;
+                        }
+                        throw new Error('HTTP ' + res.status);
+                    }
+                    const data = await res.json();
+                    const messages = data['hydra:member'] || [];
+
+                    const newOnes = messages.filter(m => !knownIds.has(m.id));
+                    if (newOnes.length > 0 && knownIds.size > 0) {
+                        showMsg('📬 收到 ' + newOnes.length + ' 封新邮件！', 'success');
+                    }
+                    messages.forEach(m => knownIds.add(m.id));
+
+                    renderInbox(messages);
+                } catch (err) {
+                    console.warn('拉取失败', err);
+                }
+            }
+
+            // ===== 渲染邮件列表 =====
+            function renderInbox(messages) {
+                if (!messages.length) {
+                    $('noMailMsg').style.display = 'block';
+                    $('mailList').style.display = 'none';
+                    $('mailList').innerHTML = '';
+                    setStatus('监听中 — 等待邮件…', true);
+                    return;
+                }
+
+                $('noMailMsg').style.display = 'none';
+                $('mailList').style.display = 'block';
+
+                let html = '';
+                messages.forEach(msg => {
+                    const from = msg.from ? (msg.from.name || msg.from.address) : '未知';
+                    const subject = msg.subject || '(无主题)';
+                    const preview = msg.preview || msg.intro || '';
+                    const time = timeAgo(msg.createdAt);
+                    const unread = !msg.seen ? 'unread' : '';
+                    html += `
+                        <div class="mail-item ${unread}" data-id="${msg.id}">
+                          <span class="time">${time}</span>
+                          <div class="from">${escapeHtml(from)}</div>
+                          <div class="subject">${escapeHtml(subject)}</div>
+                          <div class="preview">${escapeHtml(preview)}</div>
+                        </div>`;
+                });
+                $('mailList').innerHTML = html;
+                setStatus('📬 ' + messages.length + ' 封邮件 · 实时监听中', true);
+
+                document.querySelectorAll('.mail-item').forEach(el => {
+                    el.addEventListener('click', () => showMailDetail(el.dataset.id));
+                });
+            }
+
+            // ===== 查看邮件详情 =====
+            async function showMailDetail(msgId) {
+                if (!token) return;
+                try {
+                    const res = await fetch(API + '/messages/' + msgId, {
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    });
+                    if (!res.ok) throw new Error('获取邮件失败');
+                    const msg = await res.json();
+
+                    let body = '';
+                    if (msg.html && msg.html.length > 0) {
+                        body = msg.html.map(stripHtml).join('\n\n');
+                    } else if (msg.text) {
+                        body = msg.text;
+                    } else {
+                        body = '(无内容)';
+                    }
+
+                    const from = msg.from ? (msg.from.name || msg.from.address) : '未知';
+                    $('modalSubject').textContent = msg.subject || '(无主题)';
+                    $('modalMeta').textContent = '发件人：' + from + '  ·  ' + new Date(msg.createdAt).toLocaleString();
+                    $('modalBody').textContent = body;
+                    $('mailModal').classList.add('show');
+
+                    if (!msg.seen) fetchInbox();
+                } catch (err) {
+                    showMsg('无法加载邮件详情', 'error');
+                }
+            }
+
+            // ===== 销毁邮箱 =====
+            async function deleteTempMail() {
+                if (!accountId || !token) return;
+                try {
+                    const res = await fetch(API + '/accounts/' + accountId, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    });
+                    if (res.ok || res.status === 404) {
+                        showMsg('🗑️ 邮箱已销毁', 'info');
+                    }
+                } catch (err) {
+                    console.warn(err);
+                }
+                destroyAll();
+            }
+
+            function destroyAll() {
+                stopPolling();
+                emailAddress = '';
+                token = '';
+                accountId = '';
+                knownIds.clear();
+                $('emailAddr').textContent = '—';
+                $('copyBtn').style.display = 'none';
+                $('genBtn').textContent = '✨ 生成邮箱';
+                $('refreshBtn').disabled = true;
+                $('deleteBtn').disabled = true;
+                $('noMailMsg').style.display = 'block';
+                $('mailList').style.display = 'none';
+                $('mailList').innerHTML = '';
+                setStatus('尚未生成邮箱');
+            }
+
+            // ===== 轮询 =====
+            function startPolling() {
+                stopPolling();
+                pollTimer = setInterval(() => { if (token) fetchInbox(); }, 8000);
+            }
+
+            function stopPolling() {
+                if (pollTimer) { clearInterval(pollTimer);
+                    pollTimer = null; }
+            }
+
+            // ===== 复制地址 =====
+            $('copyBtn').addEventListener('click', function() {
+                if (!emailAddress) return;
+                const text = emailAddress;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => showMsg('📋 已复制到剪贴板', 'success'));
+                } else {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                    showMsg('📋 已复制', 'success');
+                }
+            });
+
+            // ===== 按钮事件 =====
+            $('genBtn').addEventListener('click', function() {
+                if (emailAddress) {
+                    if (!confirm('确定要销毁当前邮箱并重新生成吗？')) return;
+                    deleteTempMail().then(() => setTimeout(() => createTempMail(), 350));
+                } else {
+                    createTempMail();
+                }
+            });
+
+            $('refreshBtn').addEventListener('click', function() {
+                if (token) { fetchInbox();
+                    showMsg('🔄 已刷新收件箱', 'info'); }
+            });
+
+            $('deleteBtn').addEventListener('click', function() {
+                if (confirm('确定要销毁当前临时邮箱吗？销毁后无法恢复。')) {
+                    deleteTempMail();
+                }
+            });
+
+            // 关闭弹窗
+            $('closeModalBtn').addEventListener('click', () => $('mailModal').classList.remove('show'));
+            $('mailModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('show');
+            });
+
+            // 清理
+            window.addEventListener('beforeunload', stopPolling);
+
+            // ===== 初始化 =====
+            loadSettings();
+
+        })();
+    </script>
+</body>
+</html>
