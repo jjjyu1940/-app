@@ -49,6 +49,10 @@ https://wwanh.lanzouw.com/ikKtz3zjk2te
 https://github.com/jjjyu1940/-app
 
 
+# 🚦需要更改此项目？
+将index.html中的代码更改后用任意打包软件打包即可。
+本人因为个人原因无法上传全部项目结构。
+
 
 
 
