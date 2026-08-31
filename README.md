@@ -46,12 +46,11 @@ https://wwanh.lanzouw.com/ikKtz3zjk2te
 下载index.html即可在任何设备上使用。
 
 ## gitcode地址:
-https://github.com/jjjyu1940/-app
+https://gitcode.com/mcplayer1553880/webmail
 
 
 # 🚦需要更改此项目？
-将index.html中的代码更改后用任意打包软件打包即可。
-本人因为个人原因无法上传全部项目结构。
+github版已恢复更新 
 
 
 
