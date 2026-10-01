@@ -1,0 +1,44 @@
+Signature-Version: 1.0
+Created-By: Apktool M
+SHA1-Digest-Manifest: uwvPKn+vGApWlZ5/o6k2rJsg1BQ=
+X-Android-APK-Signed: 2
+
+Name: AndroidManifest.xml
+SHA1-Digest: KPUORuCPluaRwUHRLpND9offvQs=
+
+Name: assets/activity.js
+SHA1-Digest: afw91GBi+0BM3WJ/fpRMbCQwY0Q=
+
+Name: assets/index.html
+SHA1-Digest: 8Hx+kklJJeRcT9b/2oMR574zmBo=
+
+Name: classes.dex
+SHA1-Digest: bVGOrNFQtN8ZABD/bJUyUCOYxNM=
+
+Name: res/layout/main.xml
+SHA1-Digest: F2XG8ayn7pbCEIZIAEXtnEapLdA=
+
+Name: res/layout/popup.xml
+SHA1-Digest: 27fGEtFDiX2ZgPf5ZddGZGkaLMk=
+
+Name: res/mipmap/icon.png
+SHA1-Digest: QQmSd+xSH5Hi+SgJeq43i17Ln20=
+
+Name: res/mipmap/shape.xml
+SHA1-Digest: SwuztbLLy4la87tp5oQPBObvRgo=
+
+Name: res/raw/mtsza.web
+SHA1-Digest: sj/OC5R6U5HQPF4+QMR+0xyYWQg=
+
+Name: res/raw/mtszb.web
+SHA1-Digest: YKsqh9PKS0Goj92TBLpRA24YSE0=
+
+Name: res/raw/mtszc.web
+SHA1-Digest: j8Hfzn56jvO2MC2iYBmehDqyag0=
+
+Name: res/xml/paths.xml
+SHA1-Digest: tRGx+Ss22xyNVA9WI9pkny5wc1k=
+
+Name: resources.arsc
+SHA1-Digest: Y61Z5t1Dj8yGiKTqK3tlOmoFgXI=
+
