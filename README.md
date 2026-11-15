@@ -37,7 +37,7 @@ https://wwanh.lanzouw.com/ikKtz3zjk2te
 也可以直接下载
 
 临时邮箱_v1.0(2147483647).apk
-
+webide.apk为打包工具
 
 支持 Android 9 以上
 网盘下载并不是最新版本。

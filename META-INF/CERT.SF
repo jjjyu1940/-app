@@ -1,44 +1,50 @@
 Signature-Version: 1.0
-Created-By: Apktool M
-SHA1-Digest-Manifest: uwvPKn+vGApWlZ5/o6k2rJsg1BQ=
-X-Android-APK-Signed: 2
+Created-By: 1.0 (Android)
+SHA-256-Digest-Manifest: 92yrKPiv0ahfMdiH1z2YLxq6VN8Qiyp/BowrSVmCRhI=
+X-Android-APK-Signed: 2, 3
 
 Name: AndroidManifest.xml
-SHA1-Digest: KPUORuCPluaRwUHRLpND9offvQs=
+SHA-256-Digest: 45aFbqevJvSCqu9UYoyEwgRaRfrwH4Q2PwBAp7PP1T8=
 
 Name: assets/activity.js
-SHA1-Digest: afw91GBi+0BM3WJ/fpRMbCQwY0Q=
+SHA-256-Digest: I2we5Z2fgTpVwfHXCEyKnoj+TxS0v1kI4ge63PHbwBI=
+
+Name: assets/favicon.png
+SHA-256-Digest: KayRE9te3NYqpYJCX6qIZ0tsmBBSq3A3KdY1WBwMPBw=
+
+Name: assets/icon.png
+SHA-256-Digest: DyThEwp6Oc/uhrDQrXu7tifoWMHkJGgU5QczaAkfQIw=
 
 Name: assets/index.html
-SHA1-Digest: 8Hx+kklJJeRcT9b/2oMR574zmBo=
+SHA-256-Digest: S2KJPjur1ZJUkWvmWAzgqeHXVb5AHv/yi4H1AGKx4+E=
 
 Name: classes.dex
-SHA1-Digest: bVGOrNFQtN8ZABD/bJUyUCOYxNM=
+SHA-256-Digest: U0W951Xpvo8Brn1Pt/UtW9iP3SX/q5dKuQrMpawJZ1Y=
 
 Name: res/layout/main.xml
-SHA1-Digest: F2XG8ayn7pbCEIZIAEXtnEapLdA=
+SHA-256-Digest: WrMUD+CX9YeuJ/GjmvIzVpy2fc3cjxVZVq0Xv+rp38w=
 
 Name: res/layout/popup.xml
-SHA1-Digest: 27fGEtFDiX2ZgPf5ZddGZGkaLMk=
+SHA-256-Digest: kLqVkmdCIMlOUM7VPL0nJFN+ns6FMWhPmF5HREzEJhQ=
 
 Name: res/mipmap/icon.png
-SHA1-Digest: QQmSd+xSH5Hi+SgJeq43i17Ln20=
+SHA-256-Digest: nWVZqZbLMgiSxq+KlxbZIwbhHGCtOCK3NHJ0Byh+c9c=
 
 Name: res/mipmap/shape.xml
-SHA1-Digest: SwuztbLLy4la87tp5oQPBObvRgo=
+SHA-256-Digest: axtkyuBps9ejr4KfAtI4LeUrMJ2Q/dcPvvFPI8ieaFY=
 
 Name: res/raw/mtsza.web
-SHA1-Digest: sj/OC5R6U5HQPF4+QMR+0xyYWQg=
+SHA-256-Digest: FOKODrTv+7UIAbd5X6CKxZiL5nB1Z7cy9+FAg8+5iR0=
 
 Name: res/raw/mtszb.web
-SHA1-Digest: YKsqh9PKS0Goj92TBLpRA24YSE0=
+SHA-256-Digest: dyf5Q2AS5lmdrtbr5m34rHYSPr0p1DGr9ePBoniIFLw=
 
 Name: res/raw/mtszc.web
-SHA1-Digest: j8Hfzn56jvO2MC2iYBmehDqyag0=
+SHA-256-Digest: 8Q0pU4gsRq+fsJ7d5nQ7Cc2QgZDeCva5P/J5p1DOjU4=
 
 Name: res/xml/paths.xml
-SHA1-Digest: tRGx+Ss22xyNVA9WI9pkny5wc1k=
+SHA-256-Digest: DU4FRyzeCrj0i339sw9wGmXdB6OjuTtOZo6vIxvckwc=
 
 Name: resources.arsc
-SHA1-Digest: Y61Z5t1Dj8yGiKTqK3tlOmoFgXI=
+SHA-256-Digest: 7Rh8fv+VBNcOnH616364eq8oKtDdb59tXKvSGqm12ws=
 

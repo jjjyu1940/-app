@@ -1,0 +1,50 @@
+Signature-Version: 1.0
+Created-By: Android Gradle 8.0.2
+SHA-256-Digest-Manifest: PuoQ+P2+72rRm3XM8b8Lm/uAzilC+RCkz6Uj7a1CFg4=
+X-Android-APK-Signed: 2,3
+
+Name: AndroidManifest.xml
+SHA-256-Digest: KENI21vXjxnAiXUKIU/Ngu9N5/XBSzRATWGJV9bzujE=
+
+Name: assets/activity.js
+SHA-256-Digest: I2we5Z2fgTpVwfHXCEyKnoj+TxS0v1kI4ge63PHbwBI=
+
+Name: assets/favicon.png
+SHA-256-Digest: KayRE9te3NYqpYJCX6qIZ0tsmBBSq3A3KdY1WBwMPBw=
+
+Name: assets/icon.png
+SHA-256-Digest: DyThEwp6Oc/uhrDQrXu7tifoWMHkJGgU5QczaAkfQIw=
+
+Name: assets/index.html
+SHA-256-Digest: S2KJPjur1ZJUkWvmWAzgqeHXVb5AHv/yi4H1AGKx4+E=
+
+Name: classes.dex
+SHA-256-Digest: U0W951Xpvo8Brn1Pt/UtW9iP3SX/q5dKuQrMpawJZ1Y=
+
+Name: res/layout/main.xml
+SHA-256-Digest: WrMUD+CX9YeuJ/GjmvIzVpy2fc3cjxVZVq0Xv+rp38w=
+
+Name: res/layout/popup.xml
+SHA-256-Digest: kLqVkmdCIMlOUM7VPL0nJFN+ns6FMWhPmF5HREzEJhQ=
+
+Name: res/mipmap/icon.png
+SHA-256-Digest: nWVZqZbLMgiSxq+KlxbZIwbhHGCtOCK3NHJ0Byh+c9c=
+
+Name: res/mipmap/shape.xml
+SHA-256-Digest: axtkyuBps9ejr4KfAtI4LeUrMJ2Q/dcPvvFPI8ieaFY=
+
+Name: res/raw/mtsza.web
+SHA-256-Digest: FOKODrTv+7UIAbd5X6CKxZiL5nB1Z7cy9+FAg8+5iR0=
+
+Name: res/raw/mtszb.web
+SHA-256-Digest: dyf5Q2AS5lmdrtbr5m34rHYSPr0p1DGr9ePBoniIFLw=
+
+Name: res/raw/mtszc.web
+SHA-256-Digest: 8Q0pU4gsRq+fsJ7d5nQ7Cc2QgZDeCva5P/J5p1DOjU4=
+
+Name: res/xml/paths.xml
+SHA-256-Digest: DU4FRyzeCrj0i339sw9wGmXdB6OjuTtOZo6vIxvckwc=
+
+Name: resources.arsc
+SHA-256-Digest: cMM3QNo5y6sngm0WZB6Xnc6M+kjRRC/qDTM2+9ceL4Y=
+

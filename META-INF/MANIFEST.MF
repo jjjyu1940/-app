@@ -1,41 +1,49 @@
 Manifest-Version: 1.0
+Built-By: Signflinger
+Created-By: Android Gradle 8.0.2
 
 Name: AndroidManifest.xml
-SHA1-Digest: rwXzgTvnQZYB++LNfmw108XtGdg=
+SHA-256-Digest: KTAtUWBfWxFhAMx4+172/p7sBQbN521JMZXn6pwyb9M=
 
 Name: assets/activity.js
-SHA1-Digest: rA+9ZG+JkxKyHOrEnmm/iaAJcXU=
+SHA-256-Digest: eTVYEWRUIBm1AXrE88saXQsAeEyKRYueH28o4jXJ2nU=
+
+Name: assets/favicon.png
+SHA-256-Digest: qcolc1AOgHluvdUwHG10fmN5ltEw+mjNrvHNn+iwsXA=
+
+Name: assets/icon.png
+SHA-256-Digest: 5HVisfuGLj0+PATc+9ocY8xhWmwcrjVkFAIumtEVsug=
 
 Name: assets/index.html
-SHA1-Digest: 9+n1Or792nfXCobgV4UXmHwV8ZE=
+SHA-256-Digest: R9uvX8cAYwlzABZPsSDz7Uu8GRYks2daoTSecSuxcAc=
 
 Name: classes.dex
-SHA1-Digest: bg2HdfAbuI2dYKnBJhjjNFUhECM=
+SHA-256-Digest: FELAPoDKqbJXR6LpSS/39kYGRa373NgNaPCS24+zDME=
 
 Name: res/layout/main.xml
-SHA1-Digest: Uoqz321X1QuCMR4BU7FdO7JaDl0=
+SHA-256-Digest: +7FT/8qI0BPy9Nus8kQPMyQh0qdyu3THRIwhIWh3044=
 
 Name: res/layout/popup.xml
-SHA1-Digest: zQztnD05eQKVlWA4H7cYf3CRe5I=
+SHA-256-Digest: 3ImJIoZBU1X1CSBfmaNoWGl0Id8uGlhW/QawYqhmDYU=
 
 Name: res/mipmap/icon.png
-SHA1-Digest: r3ObA5ut7aXjXcwk6Ctz/zmYGTo=
+SHA-256-Digest: 5HVisfuGLj0+PATc+9ocY8xhWmwcrjVkFAIumtEVsug=
 
 Name: res/mipmap/shape.xml
-SHA1-Digest: 4Sub44GeHxIG27buEyuYDwwiwPo=
+SHA-256-Digest: Mh5i1ENk402k2PPhlT9KOz2hxJJK+noUPl8LCpe+wBc=
 
 Name: res/raw/mtsza.web
-SHA1-Digest: zFusd27WLdBz4INo/IZKuEAz7xs=
+SHA-256-Digest: vraOJOYNtpwEGYyg77K6QcXdeLFPc9lVjfIR2TiKHsk=
 
 Name: res/raw/mtszb.web
-SHA1-Digest: qkjBOecRMhl3nYUKjqbqH+S+En4=
+SHA-256-Digest: /h4HXKeKK6Wg2C1vzL4HWoP/TRv22BM+KxQWwdudTmc=
 
 Name: res/raw/mtszc.web
-SHA1-Digest: OoqXv8qTnPz/q5tAl2rRuKdo+l0=
+SHA-256-Digest: NExFylO5efChfZX6yZywyZRVJtcQ4TjU+vQOFVDkr6w=
 
 Name: res/xml/paths.xml
-SHA1-Digest: nUJzLjqQqjDKJZN7D3PsO2Gg/RQ=
+SHA-256-Digest: 0Z72IqXn2Z+JkMOsd2e/+ivpw6kSxfLJwCxJ1bxkMIU=
 
 Name: resources.arsc
-SHA1-Digest: cbiky16m/MP/Xb1yFNkXwHHwB24=
+SHA-256-Digest: x5XXc3CpHfPOQ6NlmHU1OcCj7t8nbkYe1ZGhaoTZAlE=
 
